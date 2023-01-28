@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "es5",                          
-    "module": "ESNext",                    
-    "lib": ["es6"],                     
+    "module": "ESNext",   
+    "declaration": true,                 
+    "lib": ["es6", "es2015", "dom"],                     
     "allowJs": true,
     "outDir": "build",                          
     "rootDir": "src",

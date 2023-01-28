@@ -1,10 +1,13 @@
 {
   "name": "architecto",
-  "version": "1.0.0",
+  "version": "0.0.8",
   "description": "",
-  "main": "index.js",
+  "main": "./build/index.js",
+  "bin": {
+    "architecto": "./build/index.js"
+  },
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc -p .",
     "dev": "ts-node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,7 +26,9 @@
     "@types/clear": "^0.1.2",
     "@types/figlet": "^1.5.5",
     "@types/inquirer": "^9.0.3",
+    "@types/js-yaml": "^4.0.5",
     "@types/node": "^18.11.18",
+    "pkg": "^5.8.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
   },
@@ -33,7 +38,8 @@
     "chalk": "^5.2.0",
     "clui": "^0.3.6",
     "figlet": "^1.5.2",
-    "inquirer": "^9.1.4"
+    "inquirer": "^9.1.4",
+    "js-yaml": "^4.1.0"
   },
   "type": "module"
 }
