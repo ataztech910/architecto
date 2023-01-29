@@ -1,23 +1,6 @@
 import { IGitStrategy } from "types/git.models.ts";
 import { createTokenAuth } from "@octokit/auth-token";
 import clui from "clui";
-import inquirer from "inquirer";
-
-
-const getTwoFactorAuthenticationCode = () => {
-    return inquirer.prompt({
-      name: 'twoFactorAuthenticationCode',
-      type: 'input',
-      message: 'Enter your two-factor authentication code:',
-      validate: function(value) {
-        if (value.length) {
-          return true;
-        } else {
-          return 'Please enter your two-factor authentication code.';
-        }
-      }
-    });
-};
 
 class GitHubStrategy implements IGitStrategy {
     async getAuthToken(login: string): Promise<string> {
