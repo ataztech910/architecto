@@ -1,6 +1,8 @@
 const enum Messages {
-    ENTER_EMAIL = "Enter your Git username or e-mail address:",
-    RE_ENTER_EMAIL = "Please enter your username or e-mail address.",
+    ENTER_TOKEN = "Enter your Git personal token:",
+    RE_ENTER_TOKEN = "Please enter your treronal token.",
+    ENTER_LOGIN = "Enter your login:",
+    RE_ENTER_LOGIN = "Please enter your login.",
     ENTER_PASSWORD = "Enter your password:",
     RE_ENTER_PASSWORD = "Please enter your password.",
     ENTER_PROJECT_NAME = "Enter your new project name",
