@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsc -p .",
     "dev": "ts-node ./src/index.ts",
+    "clui": "ts-node ./src/cli_examples/clui.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
