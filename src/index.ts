@@ -9,6 +9,8 @@ import questions from "./config/questions.js";
 import { IQuestion } from "./types/data.models.js";
 import Store from "./service/store.js";
 import { generateConfiguration } from "./lib/files.js";
+import GitContext from "./lib/git.js";
+import GitHubStrategy from "./lib/github.strategy.js";
 
 clearCLI();
 const store = Store.getInstance();
@@ -33,7 +35,20 @@ const run = async () => {
         }
         store.updateData(key, credentials[key]);
     });
+
     generateConfiguration(store.storeData);
+
+    // For the example purpose the strategy will be set manually
+    const gitContext = new GitContext(new GitHubStrategy());
+
+    const gitToken = await gitContext.auth(store.storeData['personal_token']);
+    if (!gitToken) {
+        console.log(chalk.red('Git auth incorrect'));
+        return false;
+    }
+    Store.getInstance().updateData("git_token", gitToken);
+    
+    console.log(store.storeData);
 };
 
 run();

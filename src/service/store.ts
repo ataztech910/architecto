@@ -13,7 +13,7 @@ class Store {
         return Store.instance;
     }
 
-    updateData(key: string, newValue: Partial<any>) {
+    updateData(key: string, newValue: string) {
         this.storeData[key] = newValue;
     }
 

@@ -3,17 +3,10 @@ import { Messages } from "./messages";
 
 const questions: IQuestion[] = [
     {
-        name: 'username',
+        name: 'personal_token',
         type: 'input',
-        message: Messages.ENTER_EMAIL,
-        messageOnFailure: Messages.RE_ENTER_EMAIL,
-        valut: true
-    },
-    {
-        name: 'password',
-        type: 'password',
-        message: Messages.ENTER_PASSWORD,
-        messageOnFailure: Messages.RE_ENTER_PASSWORD,
+        message: Messages.ENTER_TOKEN,
+        messageOnFailure: Messages.RE_ENTER_TOKEN,
         valut: true
     },
     {
