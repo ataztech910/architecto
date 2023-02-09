@@ -9,7 +9,11 @@
   "scripts": {
     "build": "tsc -p .",
     "dev": "ts-node ./src/index.ts",
+    "chalk": "ts-node ./src/cli_examples/chalk.ts",
     "clui": "ts-node ./src/cli_examples/clui.ts",
+    "figlet": "ts-node ./src/cli_examples/figlet.ts",
+    "inquirer": "ts-node ./src/cli_examples/inquirer.ts",
+    "ink": "node ./src/cli_examples/ink.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -40,8 +44,11 @@
     "chalk": "^5.2.0",
     "clui": "^0.3.6",
     "figlet": "^1.5.2",
+    "import-jsx": "^4.0.1",
+    "ink": "^3.2.0",
     "inquirer": "^9.1.4",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "react": "^17.0.2"
   },
   "type": "module"
 }
