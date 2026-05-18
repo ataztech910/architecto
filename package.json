@@ -1,0 +1,40 @@
+{
+  "name": "architecto",
+  "version": "0.1.0",
+  "description": "An AI-first declarative architecture protocol for software systems",
+  "type": "module",
+  "main": "./dist/index.js",
+  "bin": {
+    "architecto": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ataztech910/architecto.git"
+  },
+  "keywords": [
+    "architecture",
+    "declarative",
+    "specification",
+    "DSL",
+    "AI-first"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^13.0.6",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.0",
+    "@types/node": "^20.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}

@@ -1,0 +1,54 @@
+kind: artifact
+name: market_platform
+version: "0.1.0"
+description: A market's presence on a specific platform (Polymarket or Kalshi)
+
+fields:
+  - name: id
+    type: uuid
+    required: true
+    description: Unique record ID
+
+  - name: market_id
+    type: uuid
+    required: true
+    references: market.id
+    description: Reference to parent market
+
+  - name: platform
+    type: enum
+    values:
+      - polymarket
+      - kalshi
+    required: true
+    description: Platform name
+
+  - name: external_id
+    type: string
+    required: true
+    description: ID used by the platform
+
+  - name: url
+    type: string
+    required: false
+    description: Direct link to market on platform
+
+  - name: yes_price
+    type: float
+    required: true
+    description: "Current YES price on this platform"
+
+  - name: no_price
+    type: float
+    required: true
+    description: "Current NO price on this platform"
+
+  - name: liquidity
+    type: float
+    required: false
+    description: Available liquidity for trading
+
+  - name: last_synced_at
+    type: timestamp
+    required: true
+    description: Last time prices were updated

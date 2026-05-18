@@ -1,0 +1,97 @@
+kind: workspace
+name: prediction-market-dashboard
+version: "0.1.0"
+description: File and folder layout for the generated Next.js application
+
+structure:
+  # Pages (from Interface specs)
+  - path: src/app/page.tsx
+    description: Homepage component
+    generated_from: homepage.interface.yaml
+    generate_with: nextjs-page
+
+  - path: src/app/market/[slug]/page.tsx
+    description: Market detail page component
+    generated_from: market-detail.interface.yaml
+    generate_with: nextjs-page
+
+  # API Routes (from Flow specs)
+  - path: src/app/api/markets/route.ts
+    description: GET /api/markets endpoint
+    generated_from: load-homepage.flow.yaml
+    generate_with: nextjs-api-route
+
+  - path: src/app/api/markets/[slug]/route.ts
+    description: GET /api/markets/[slug] endpoint
+    generated_from: load-market-detail.flow.yaml
+    generate_with: nextjs-api-route
+
+  - path: src/app/api/markets/[slug]/history/route.ts
+    description: GET /api/markets/[slug]/history endpoint
+    generated_from: price-history.artifact.yaml
+    generate_with: nextjs-api-route
+
+  # Cron Routes (from Flow specs)
+  - path: src/app/api/cron/polymarket/route.ts
+    description: Cron endpoint for Polymarket ingestion
+    generated_from: ingest-polymarket.flow.yaml
+    generate_with: nextjs-cron-route
+
+  - path: src/app/api/cron/kalshi/route.ts
+    description: Cron endpoint for Kalshi ingestion
+    generated_from: ingest-kalshi.flow.yaml
+    generate_with: nextjs-cron-route
+
+  # Database Schemas (from Artifact specs)
+  - path: src/db/schema/markets.ts
+    description: Markets table schema
+    generated_from: market.artifact.yaml
+    generate_with: drizzle-schema
+
+  - path: src/db/schema/market-platforms.ts
+    description: Market platforms table schema
+    generated_from: market-platform.artifact.yaml
+    generate_with: drizzle-schema
+
+  - path: src/db/schema/price-history.ts
+    description: Price history table schema
+    generated_from: price-history.artifact.yaml
+    generate_with: drizzle-schema
+
+  # Services (from Flow specs)
+  - path: src/services/polymarket.ts
+    description: Polymarket API client
+    generated_from: ingest-polymarket.flow.yaml
+    generate_with: service-class
+
+  - path: src/services/kalshi.ts
+    description: Kalshi API client
+    generated_from: ingest-kalshi.flow.yaml
+    generate_with: service-class
+
+  # Types (from Artifact specs)
+  - path: src/types/market.ts
+    description: Market TypeScript type
+    generated_from: market.artifact.yaml
+    generate_with: typescript-type
+
+  - path: src/types/market-platform.ts
+    description: Market platform TypeScript type
+    generated_from: market-platform.artifact.yaml
+    generate_with: typescript-type
+
+  - path: src/types/price-history.ts
+    description: Price history TypeScript type
+    generated_from: price-history.artifact.yaml
+    generate_with: typescript-type
+
+  # Tests (from Behavior specs)
+  - path: cypress/e2e/homepage.cy.ts
+    description: Homepage E2E tests
+    generated_from: homepage.behavior.yaml
+    generate_with: cypress-spec
+
+  - path: cypress/e2e/market-detail.cy.ts
+    description: Market detail E2E tests
+    generated_from: market-detail.behavior.yaml
+    generate_with: cypress-spec

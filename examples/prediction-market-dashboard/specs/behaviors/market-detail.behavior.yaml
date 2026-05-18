@@ -1,0 +1,40 @@
+kind: behavior
+name: market-detail
+version: "0.1.0"
+description: Acceptance scenarios for the market detail page
+
+scenarios:
+  - id: shows-probability
+    given: A market exists with YES probability 65%
+    when: User visits /market/btc-price-eoy
+    then: YES probability shows 65% and NO shows 35%
+
+  - id: shows-chart
+    given: Price history exists for the market
+    when: User visits the market detail page
+    then: A historical price chart is displayed with data points
+
+  - id: shows-platform-comparison
+    given: The market exists on both Polymarket and Kalshi
+    when: User visits the market detail page
+    then: A comparison table shows prices from both platforms
+
+  - id: market-not-found
+    given: No market exists with the requested slug
+    when: User visits /market/nonexistent-slug
+    then: A 404 not found state is displayed
+
+  - id: can-trade-yes
+    given: Market is in open status with available liquidity
+    when: User clicks the 'Trade YES' button
+    then: Trade modal appears with order form and current YES price
+
+  - id: can-trade-no
+    given: Market is in open status with available liquidity
+    when: User clicks the 'Trade NO' button
+    then: Trade modal appears with order form and current NO price
+
+  - id: can-view-related-markets
+    given: The market has related prediction markets
+    when: User scrolls to the related events section
+    then: A list of related markets is displayed with links

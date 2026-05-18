@@ -1,0 +1,10 @@
+export { principlesTemplate } from './principles.js';
+export { specTypesTemplate } from './spec-types.js';
+export { flowSpecTemplate } from './flow-spec.js';
+export { interfaceSpecTemplate } from './interface-spec.js';
+export { artifactSpecTemplate } from './artifact-spec.js';
+export { policySpecTemplate } from './policy-spec.js';
+export { behaviorSpecTemplate } from './behavior-spec.js';
+export { workspaceSpecTemplate } from './workspace-spec.js';
+export { generationRulesTemplate } from './generation-rules.js';
+export { antiPatternsTemplate } from './anti-patterns.js';

@@ -1,0 +1,62 @@
+kind: flow
+name: load-market-detail
+version: "0.1.0"
+description: Load full detail for a single market page
+
+inputs:
+  - market_slug
+
+outputs:
+  - market_detail
+  - price_history
+  - platform_comparison
+  - related_events
+
+steps:
+  - id: resolve-market
+    action: db.findOne
+    requires:
+      - market_slug
+    provides:
+      - market
+    critical: true
+    onError: fail
+
+  - id: load-price-history
+    action: db.query
+    requires:
+      - market
+    provides:
+      - price_history
+    critical: true
+    onError: fail
+
+  - id: load-platform-comparison
+    action: db.query
+    requires:
+      - market
+    provides:
+      - platform_comparison
+    critical: false
+    onError: warn
+
+  - id: load-related-events
+    action: db.query
+    requires:
+      - market
+    provides:
+      - related_events
+    critical: false
+    onError: warn
+
+  - id: compose-detail
+    action: compose
+    requires:
+      - market
+      - price_history
+      - platform_comparison
+      - related_events
+    provides:
+      - market_detail
+    critical: true
+    onError: fail

@@ -1,0 +1,23 @@
+kind: policy
+name: cache
+version: "0.1.0"
+description: Cache rules for API routes and endpoints
+
+rules:
+  - id: markets-list-cache
+    description: /api/markets list response should be cached for 60 seconds
+    applies_to: GET /api/markets
+    condition: cache_ttl_seconds == 60
+    action: cache-response
+
+  - id: market-detail-cache
+    description: /api/markets/[slug] should be cached for 30 seconds
+    applies_to: GET /api/markets/[slug]
+    condition: cache_ttl_seconds == 30
+    action: cache-response
+
+  - id: history-no-cache
+    description: Price history endpoint should not be cached (real-time)
+    applies_to: GET /api/markets/[slug]/history
+    condition: no_cache
+    action: pass-through
