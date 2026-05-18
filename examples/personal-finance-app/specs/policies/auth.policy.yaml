@@ -1,0 +1,41 @@
+kind: policy
+name: auth
+version: "0.1.0"
+description: Authentication and authorization rules
+
+rules:
+  - id: public-docs
+    description: API documentation is public
+    applies_to: GET /api/docs
+    condition: any
+    action: allow
+
+  - id: login-public
+    description: Login endpoint is public
+    applies_to: POST /api/auth/login
+    condition: any
+    action: allow
+
+  - id: signup-public
+    description: Signup endpoint is public
+    applies_to: POST /api/auth/signup
+    condition: any
+    action: allow
+
+  - id: all-api-protected
+    description: All other API routes require authentication
+    applies_to: /api/*
+    condition: request.user is authenticated
+    action: allow
+
+  - id: all-pages-protected
+    description: All pages require authentication
+    applies_to: /dashboard
+    condition: request.user is authenticated
+    action: allow
+
+  - id: user-isolation
+    description: Users can only see their own data
+    applies_to: /api/users/[user_id]/*
+    condition: request.user.id == user_id
+    action: allow

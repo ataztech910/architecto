@@ -1,0 +1,45 @@
+kind: behavior
+name: budgets
+version: "0.1.0"
+description: Acceptance scenarios for budget management
+
+scenarios:
+  - id: shows-current-month-budgets
+    given: User has budgets for current month
+    when: User visits /budgets
+    then: Budget cards are shown for each category with limit and spent amounts
+
+  - id: shows-spending-percentage
+    given: User spent $50 of $100 grocery budget
+    when: User views the grocery budget
+    then: Progress bar shows 50% and "$50 of $100 spent"
+
+  - id: create-new-budget
+    given: User is on budgets page
+    when: User clicks "Create Budget" and fills form with category and limit
+    then: Budget is created and added to the list
+
+  - id: edit-budget-limit
+    given: User has existing grocery budget of $100
+    when: User clicks edit and changes limit to $150
+    then: Budget is updated and new limit is displayed
+
+  - id: delete-budget
+    given: User has a budget
+    when: User clicks delete and confirms
+    then: Budget is removed from the list
+
+  - id: view-spending-chart
+    given: User has budgets with spending data
+    when: User views /budgets
+    then: Chart shows breakdown of spending by category
+
+  - id: select-different-month
+    given: User is on budgets page viewing current month
+    when: User selects previous month in date picker
+    then: Budgets and spending for that month are displayed
+
+  - id: alert-on-overspend
+    given: Budget has alert_threshold of 80%
+    when: User spending reaches 80% of limit
+    then: Budget card is highlighted in yellow/warning color

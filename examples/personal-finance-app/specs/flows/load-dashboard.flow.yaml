@@ -1,0 +1,59 @@
+kind: flow
+name: load-dashboard
+version: "0.1.0"
+description: Get all data needed for dashboard display
+
+inputs:
+  - user_id
+
+outputs:
+  - dashboard_data
+
+steps:
+  - id: query-accounts
+    action: db.query
+    requires:
+      - user_id
+    provides:
+      - accounts
+    critical: true
+    onError: fail
+
+  - id: query-recent-transactions
+    action: db.query
+    requires:
+      - user_id
+    provides:
+      - recent_transactions
+    critical: true
+    onError: fail
+
+  - id: calculate-budget-status
+    action: db.query
+    requires:
+      - user_id
+    provides:
+      - budget_status
+    critical: false
+    onError: warn
+
+  - id: calculate-net-income
+    action: compute
+    requires:
+      - recent_transactions
+    provides:
+      - net_income
+    critical: false
+    onError: warn
+
+  - id: compose-dashboard
+    action: compose
+    requires:
+      - accounts
+      - recent_transactions
+      - budget_status
+      - net_income
+    provides:
+      - dashboard_data
+    critical: true
+    onError: fail

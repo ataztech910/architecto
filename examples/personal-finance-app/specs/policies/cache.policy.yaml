@@ -1,0 +1,34 @@
+kind: policy
+name: cache
+version: "0.1.0"
+description: Caching rules for API responses and dashboard data
+
+rules:
+  - id: dashboard-cache
+    description: Dashboard data should be cached for 30 seconds
+    applies_to: GET /api/dashboard
+    condition: cache_ttl_seconds == 30
+    action: cache-response
+
+  - id: accounts-cache
+    description: Account list should be cached for 60 seconds
+    applies_to: GET /api/accounts
+    condition: cache_ttl_seconds == 60
+    action: cache-response
+
+  - id: transactions-cache
+    description: Transactions should be cached for 10 seconds (frequently updated)
+    applies_to: GET /api/transactions
+    condition: cache_ttl_seconds == 10
+    action: cache-response
+
+  - id: budgets-cache
+    description: Budgets should be cached for 5 minutes
+    applies_to: GET /api/budgets
+    condition: cache_ttl_seconds == 300
+    action: cache-response
+
+  - id: no-cache-sync
+    description: Sync endpoint should not be cached (real-time)
+    applies_to: POST /api/sync
+    action: pass-through

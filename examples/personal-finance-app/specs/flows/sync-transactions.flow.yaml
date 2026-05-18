@@ -1,0 +1,55 @@
+kind: flow
+name: sync-transactions
+version: "0.1.0"
+description: Fetch and store transactions from connected accounts
+
+inputs:
+  - account_id
+
+outputs:
+  - sync_count
+
+steps:
+  - id: fetch-from-source
+    action: http.get
+    requires:
+      - account_id
+    provides:
+      - raw_transactions
+    critical: true
+    onError: fail
+
+  - id: normalize-transactions
+    action: transform.normalize
+    requires:
+      - raw_transactions
+    provides:
+      - normalized_transactions
+    critical: true
+    onError: fail
+
+  - id: validate-amounts
+    action: validate
+    requires:
+      - normalized_transactions
+    provides:
+      - validated_transactions
+    critical: true
+    onError: fail
+
+  - id: upsert-transactions
+    action: db.upsert
+    requires:
+      - validated_transactions
+    provides:
+      - sync_count
+    critical: true
+    onError: fail
+
+  - id: update-account-balance
+    action: db.update
+    requires:
+      - account_id
+      - validated_transactions
+    critical: false
+    onError: warn

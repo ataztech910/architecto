@@ -1,0 +1,127 @@
+kind: workspace
+name: personal-finance-app
+version: "0.1.0"
+description: File and folder layout for the generated Next.js personal finance application
+
+structure:
+  # Pages (from Interface specs)
+  - path: src/app/page.tsx
+    description: Dashboard homepage
+    generated_from: dashboard.interface.yaml
+    generate_with: nextjs-page
+
+  - path: src/app/transactions/page.tsx
+    description: Transactions list page
+    generated_from: transactions.interface.yaml
+    generate_with: nextjs-page
+
+  - path: src/app/budgets/page.tsx
+    description: Budget management page
+    generated_from: budgets.interface.yaml
+    generate_with: nextjs-page
+
+  # API Routes (from Flow specs)
+  - path: src/app/api/dashboard/route.ts
+    description: GET /api/dashboard endpoint
+    generated_from: load-dashboard.flow.yaml
+    generate_with: nextjs-api-route
+
+  - path: src/app/api/transactions/route.ts
+    description: GET /api/transactions and POST endpoints
+    generated_from: sync-transactions.flow.yaml
+    generate_with: nextjs-api-route
+
+  - path: src/app/api/accounts/route.ts
+    description: GET /api/accounts endpoint
+    generated_from: load-dashboard.flow.yaml
+    generate_with: nextjs-api-route
+
+  - path: src/app/api/budgets/route.ts
+    description: GET /api/budgets and budget management endpoints
+    generated_from: calculate-budget-status.flow.yaml
+    generate_with: nextjs-api-route
+
+  - path: src/app/api/reports/monthly/route.ts
+    description: GET /api/reports/monthly endpoint
+    generated_from: generate-monthly-report.flow.yaml
+    generate_with: nextjs-api-route
+
+  # Cron Route
+  - path: src/app/api/cron/sync/route.ts
+    description: Cron endpoint for periodic transaction sync
+    generated_from: sync-transactions.flow.yaml
+    generate_with: nextjs-cron-route
+
+  # Database Schemas (from Artifact specs)
+  - path: src/db/schema/transactions.ts
+    description: Transactions table schema
+    generated_from: transaction.artifact.yaml
+    generate_with: drizzle-schema
+
+  - path: src/db/schema/accounts.ts
+    description: Accounts table schema
+    generated_from: account.artifact.yaml
+    generate_with: drizzle-schema
+
+  - path: src/db/schema/budgets.ts
+    description: Budgets table schema
+    generated_from: budget.artifact.yaml
+    generate_with: drizzle-schema
+
+  - path: src/db/schema/categories.ts
+    description: Categories table schema
+    generated_from: category.artifact.yaml
+    generate_with: drizzle-schema
+
+  # Services (from Flow specs)
+  - path: src/services/sync-service.ts
+    description: Transaction synchronization service
+    generated_from: sync-transactions.flow.yaml
+    generate_with: service-class
+
+  - path: src/services/budget-calculator.ts
+    description: Budget calculation service
+    generated_from: calculate-budget-status.flow.yaml
+    generate_with: service-class
+
+  - path: src/services/report-generator.ts
+    description: Monthly report generation service
+    generated_from: generate-monthly-report.flow.yaml
+    generate_with: service-class
+
+  # Types (from Artifact specs)
+  - path: src/types/transaction.ts
+    description: Transaction TypeScript type
+    generated_from: transaction.artifact.yaml
+    generate_with: typescript-type
+
+  - path: src/types/account.ts
+    description: Account TypeScript type
+    generated_from: account.artifact.yaml
+    generate_with: typescript-type
+
+  - path: src/types/budget.ts
+    description: Budget TypeScript type
+    generated_from: budget.artifact.yaml
+    generate_with: typescript-type
+
+  - path: src/types/category.ts
+    description: Category TypeScript type
+    generated_from: category.artifact.yaml
+    generate_with: typescript-type
+
+  # Tests (from Behavior specs)
+  - path: cypress/e2e/dashboard.cy.ts
+    description: Dashboard E2E tests
+    generated_from: dashboard.behavior.yaml
+    generate_with: cypress-spec
+
+  - path: cypress/e2e/transactions.cy.ts
+    description: Transactions page E2E tests
+    generated_from: transactions.behavior.yaml
+    generate_with: cypress-spec
+
+  - path: cypress/e2e/budgets.cy.ts
+    description: Budgets page E2E tests
+    generated_from: budgets.behavior.yaml
+    generate_with: cypress-spec

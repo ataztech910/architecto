@@ -1,0 +1,45 @@
+kind: behavior
+name: transactions
+version: "0.1.0"
+description: Acceptance scenarios for the transactions list page
+
+scenarios:
+  - id: shows-all-transactions
+    given: User has 50+ transactions in the database
+    when: User visits /transactions
+    then: Transactions are shown in paginated table with 20 per page
+
+  - id: filter-by-date-range
+    given: User is on transactions page with transactions from multiple dates
+    when: User selects a date range filter
+    then: Only transactions within that range are displayed
+
+  - id: filter-by-category
+    given: User is on transactions page with transactions from multiple categories
+    when: User selects a category filter
+    then: Only transactions in that category are displayed
+
+  - id: sort-by-date
+    given: User is on transactions page
+    when: User clicks "Date" column header
+    then: Transactions are sorted by date ascending/descending
+
+  - id: sort-by-amount
+    given: User is on transactions page
+    when: User clicks "Amount" column header
+    then: Transactions are sorted by amount ascending/descending
+
+  - id: view-transaction-detail
+    given: User is on transactions page
+    when: User clicks on a transaction row
+    then: Modal shows full transaction details including description, notes, category
+
+  - id: edit-transaction
+    given: Transaction detail modal is open
+    when: User clicks edit button
+    then: Form allows changing category, description, notes, and save button is visible
+
+  - id: empty-state
+    given: No transactions match the current filters
+    when: User views filtered transactions
+    then: "Empty state message is shown: 'No transactions found'"

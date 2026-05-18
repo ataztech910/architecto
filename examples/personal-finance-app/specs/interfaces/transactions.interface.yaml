@@ -1,0 +1,57 @@
+kind: interface
+name: transactions
+version: "0.1.0"
+description: Full transaction list with filtering and details
+route: /transactions
+
+states:
+  - id: loading
+    description: Transactions are being loaded
+  - id: loaded
+    description: Transaction list is displayed
+  - id: empty
+    description: No transactions match filters
+  - id: error
+    description: Failed to load transactions
+
+actions:
+  - id: filter-by-date
+    description: User selects date range
+    triggers: reload-transactions
+
+  - id: filter-by-category
+    description: User selects category filter
+    triggers: reload-transactions
+
+  - id: filter-by-account
+    description: User selects account
+    triggers: reload-transactions
+
+  - id: sort-transactions
+    description: User sorts by date, amount, category
+    triggers: reload-transactions
+
+  - id: view-transaction-detail
+    description: User clicks transaction for details
+    triggers: open-detail-modal
+
+  - id: edit-transaction
+    description: User edits transaction
+    triggers: open-edit-modal
+
+components:
+  - id: filter-bar
+    type: filter-group
+    description: Date range, category, account selectors
+
+  - id: sort-controls
+    type: sort-controls
+    description: Sorting options
+
+  - id: transactions-table
+    type: table
+    description: Paginated list of transactions
+
+  - id: transaction-detail-modal
+    type: modal
+    description: Full transaction details and edit form

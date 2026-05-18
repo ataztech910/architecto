@@ -1,0 +1,56 @@
+kind: artifact
+name: budget
+version: "0.1.0"
+description: Monthly spending budget for a category
+
+fields:
+  - name: id
+    type: uuid
+    required: true
+    description: Unique budget ID
+
+  - name: user_id
+    type: uuid
+    required: true
+    description: User who owns this budget
+
+  - name: category_id
+    type: uuid
+    required: true
+    references: category.id
+    description: Which category this budget applies to
+
+  - name: limit_amount
+    type: float
+    required: true
+    description: Maximum spending for this month
+
+  - name: spent_amount
+    type: float
+    required: true
+    description: Amount spent so far this month
+
+  - name: currency
+    type: string
+    required: true
+    description: Currency code
+
+  - name: month
+    type: string
+    required: true
+    description: Year-month (YYYY-MM format)
+
+  - name: alert_threshold
+    type: float
+    required: false
+    description: Alert when spending reaches this % of limit
+
+  - name: notes
+    type: string
+    required: false
+    description: Notes about this budget
+
+  - name: created_at
+    type: timestamp
+    required: true
+    description: When record was created

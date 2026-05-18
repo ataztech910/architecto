@@ -1,0 +1,61 @@
+kind: artifact
+name: transaction
+version: "0.1.0"
+description: A single financial transaction (income or expense)
+
+fields:
+  - name: id
+    type: uuid
+    required: true
+    description: Unique transaction ID
+
+  - name: account_id
+    type: uuid
+    required: true
+    references: account.id
+    description: Reference to source/destination account
+
+  - name: category_id
+    type: uuid
+    required: true
+    references: category.id
+    description: Reference to spending category
+
+  - name: amount
+    type: float
+    required: true
+    description: Transaction amount (positive for income, negative for expenses)
+
+  - name: description
+    type: string
+    required: true
+    description: Transaction description or merchant name
+
+  - name: type
+    type: enum
+    values:
+      - income
+      - expense
+      - transfer
+    required: true
+    description: Transaction type
+
+  - name: date
+    type: timestamp
+    required: true
+    description: When the transaction occurred
+
+  - name: posted_date
+    type: timestamp
+    required: false
+    description: When the transaction was posted to the account
+
+  - name: notes
+    type: string
+    required: false
+    description: User notes about this transaction
+
+  - name: created_at
+    type: timestamp
+    required: true
+    description: When record was created

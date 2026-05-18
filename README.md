@@ -60,21 +60,21 @@ Exit code `0` if valid, `1` if errors found.
 architecto validate --dir path/to/specs
 ```
 
-## Example: Prediction Market Dashboard
+## Example: Personal Finance App
 
-See `examples/prediction-market-dashboard/` for a complete example with:
+See `examples/personal-finance-app/` for a complete example with:
 
-- 3 artifact specs (market, market_platform, price_history)
-- 4 flow specs (ingest-polymarket, ingest-kalshi, load-homepage, load-market-detail)
-- 2 interface specs (homepage, market-detail)
-- 3 policy specs (cron, cache, public-api)
-- 2 behavior specs (homepage, market-detail)
+- 4 artifact specs (transaction, account, budget, category)
+- 4 flow specs (sync-transactions, calculate-budget-status, generate-monthly-report, load-dashboard)
+- 3 interface specs (dashboard, transactions, budgets)
+- 3 policy specs (cache, sync, auth)
+- 3 behavior specs (dashboard, transactions, budgets)
 - 1 workspace spec
 
 Validate the example:
 
 ```bash
-architecto validate --dir examples/prediction-market-dashboard/specs
+architecto validate --dir examples/personal-finance-app/specs
 ```
 
 ## Spec Types
@@ -177,7 +177,7 @@ Describes folder structure and generation mappings.
 
 ```yaml
 kind: workspace
-name: prediction-market-dashboard
+name: personal-finance-app
 version: "0.1"
 structure:
   - path: src/app/page.tsx

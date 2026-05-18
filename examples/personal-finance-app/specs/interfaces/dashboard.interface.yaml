@@ -1,0 +1,51 @@
+kind: interface
+name: dashboard
+version: "0.1.0"
+description: Main dashboard showing account overview and financial summary
+route: /
+
+states:
+  - id: loading
+    description: Dashboard data is being fetched
+  - id: loaded
+    description: Dashboard is displayed
+  - id: error
+    description: Failed to load dashboard
+
+actions:
+  - id: add-account
+    description: User initiates adding a new account
+    triggers: open-account-modal
+
+  - id: sync-accounts
+    description: User manually triggers account sync
+    triggers: sync-transactions
+
+  - id: view-transactions
+    description: User clicks to see all transactions
+    triggers: navigate-to-transactions
+
+  - id: view-budgets
+    description: User clicks to see budget management
+    triggers: navigate-to-budgets
+
+components:
+  - id: account-overview
+    type: section
+    description: Shows total balance and account list with balances
+
+  - id: recent-transactions
+    type: list
+    description: Last 10 transactions with date, amount, category
+
+  - id: budget-status
+    type: section
+    description: Shows spending vs budget by category
+
+  - id: net-income-summary
+    type: metric
+    description: Total income and expenses for current month
+
+  - id: action-buttons
+    type: action-group
+    description: Add account, sync, view all transactions buttons

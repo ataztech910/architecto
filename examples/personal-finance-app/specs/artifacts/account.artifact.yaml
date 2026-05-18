@@ -1,0 +1,66 @@
+kind: artifact
+name: account
+version: "0.1.0"
+description: A bank or wallet account
+
+fields:
+  - name: id
+    type: uuid
+    required: true
+    description: Unique account ID
+
+  - name: user_id
+    type: uuid
+    required: true
+    description: User who owns this account
+
+  - name: name
+    type: string
+    required: true
+    description: Account display name (e.g., "Checking", "Savings")
+
+  - name: type
+    type: enum
+    values:
+      - checking
+      - savings
+      - investment
+      - credit_card
+      - wallet
+    required: true
+    description: Account type
+
+  - name: balance
+    type: float
+    required: true
+    description: Current account balance
+
+  - name: currency
+    type: string
+    required: true
+    description: Currency code (USD, EUR, etc.)
+
+  - name: institution
+    type: string
+    required: false
+    description: Bank or institution name
+
+  - name: account_number
+    type: string
+    required: false
+    description: Last 4 digits or masked account number
+
+  - name: last_synced_at
+    type: timestamp
+    required: false
+    description: When transactions were last fetched
+
+  - name: is_active
+    type: boolean
+    required: true
+    description: Whether account is active
+
+  - name: created_at
+    type: timestamp
+    required: true
+    description: When record was created

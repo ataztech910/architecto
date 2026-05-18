@@ -1,0 +1,40 @@
+kind: behavior
+name: dashboard
+version: "0.1.0"
+description: Acceptance scenarios for the dashboard page
+
+scenarios:
+  - id: shows-account-overview
+    given: User has multiple accounts with balances
+    when: User visits the dashboard
+    then: Total balance and individual account balances are displayed
+
+  - id: shows-recent-transactions
+    given: User has recent transactions in the database
+    when: User visits the dashboard
+    then: Last 10 transactions are shown with date, description, amount, category
+
+  - id: shows-budget-status
+    given: User has budgets set for current month
+    when: User visits the dashboard
+    then: Spending vs budget is shown for each category with progress bars
+
+  - id: shows-net-income
+    given: User has income and expenses this month
+    when: User visits the dashboard
+    then: Total income, total expenses, and net amount are displayed
+
+  - id: can-add-account
+    given: User is on the dashboard
+    when: User clicks "Add Account" button
+    then: Account connection modal appears
+
+  - id: can-sync-manually
+    given: User is on the dashboard
+    when: User clicks "Sync Accounts" button
+    then: Sync starts and loading indicator is shown
+
+  - id: can-navigate-to-transactions
+    given: User is on the dashboard
+    when: User clicks "View All" in recent transactions section
+    then: User is navigated to /transactions page

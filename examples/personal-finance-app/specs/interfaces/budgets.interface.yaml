@@ -1,0 +1,55 @@
+kind: interface
+name: budgets
+version: "0.1.0"
+description: Budget management and spending tracking
+route: /budgets
+
+states:
+  - id: loading
+    description: Budgets are being loaded
+  - id: loaded
+    description: Budget list is displayed
+  - id: error
+    description: Failed to load budgets
+
+actions:
+  - id: create-budget
+    description: User creates new budget
+    triggers: open-budget-form
+
+  - id: edit-budget
+    description: User edits existing budget
+    triggers: open-edit-form
+
+  - id: delete-budget
+    description: User deletes budget
+    triggers: confirm-delete
+
+  - id: view-budget-detail
+    description: User clicks budget for detailed view
+    triggers: open-detail
+
+  - id: select-month
+    description: User changes month to view
+    triggers: reload-budgets
+
+components:
+  - id: month-selector
+    type: date-input
+    description: Select which month to view budgets for
+
+  - id: budget-cards
+    type: card-list
+    description: Grid of budget cards showing category, limit, spent, % used
+
+  - id: spending-chart
+    type: chart
+    description: Visual breakdown of spending by category
+
+  - id: budget-detail-modal
+    type: modal
+    description: Detailed budget info with edit form
+
+  - id: create-budget-form
+    type: form
+    description: Form to create new budget

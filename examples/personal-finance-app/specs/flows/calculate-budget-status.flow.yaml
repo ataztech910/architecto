@@ -1,0 +1,51 @@
+kind: flow
+name: calculate-budget-status
+version: "0.1.0"
+description: Compute spending vs budget for current period
+
+inputs:
+  - user_id
+  - month
+
+outputs:
+  - budget_summary
+
+steps:
+  - id: query-budgets
+    action: db.query
+    requires:
+      - user_id
+      - month
+    provides:
+      - budgets
+    critical: true
+    onError: fail
+
+  - id: query-spending
+    action: db.query
+    requires:
+      - user_id
+      - month
+    provides:
+      - transactions
+    critical: true
+    onError: fail
+
+  - id: calculate-totals
+    action: compute
+    requires:
+      - budgets
+      - transactions
+    provides:
+      - budget_status
+    critical: true
+    onError: fail
+
+  - id: compose-summary
+    action: compose
+    requires:
+      - budget_status
+    provides:
+      - budget_summary
+    critical: true
+    onError: fail

@@ -1,0 +1,60 @@
+kind: flow
+name: generate-monthly-report
+version: "0.1.0"
+description: Create summary of income, expenses, savings for a month
+
+inputs:
+  - user_id
+  - month
+
+outputs:
+  - report
+
+steps:
+  - id: query-accounts
+    action: db.query
+    requires:
+      - user_id
+    provides:
+      - accounts
+    critical: true
+    onError: fail
+
+  - id: query-transactions
+    action: db.query
+    requires:
+      - user_id
+      - month
+    provides:
+      - transactions
+    critical: true
+    onError: fail
+
+  - id: calculate-totals
+    action: compute
+    requires:
+      - transactions
+    provides:
+      - totals
+    critical: true
+    onError: fail
+
+  - id: calculate-savings
+    action: compute
+    requires:
+      - totals
+    provides:
+      - savings
+    critical: true
+    onError: fail
+
+  - id: compose-report
+    action: compose
+    requires:
+      - accounts
+      - totals
+      - savings
+    provides:
+      - report
+    critical: true
+    onError: fail

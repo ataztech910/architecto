@@ -1,0 +1,29 @@
+kind: policy
+name: sync
+version: "0.1.0"
+description: Rules for automatic transaction synchronization
+
+rules:
+  - id: auto-sync-interval
+    description: Automatically sync accounts every 15 minutes
+    applies_to: sync-transactions
+    condition: interval_minutes == 15
+    action: trigger-flow
+
+  - id: manual-sync-allowed
+    description: Users can manually trigger sync anytime
+    applies_to: POST /api/sync
+    condition: any
+    action: trigger-flow
+
+  - id: max-concurrent-syncs
+    description: Only one sync per user at a time
+    applies_to: sync-transactions
+    condition: concurrent_limit == 1
+    action: queue
+
+  - id: sync-error-retry
+    description: Retry failed syncs up to 3 times
+    applies_to: sync-transactions
+    condition: retry_count <= 3
+    action: retry

@@ -1,0 +1,49 @@
+kind: artifact
+name: category
+version: "0.1.0"
+description: Spending category for organizing transactions
+
+fields:
+  - name: id
+    type: uuid
+    required: true
+    description: Unique category ID
+
+  - name: name
+    type: string
+    required: true
+    description: Category name (e.g., "Groceries", "Entertainment")
+
+  - name: type
+    type: enum
+    values:
+      - income
+      - expense
+      - transfer
+    required: true
+    description: Whether this is for income, expense, or transfer
+
+  - name: icon
+    type: string
+    required: false
+    description: Icon name or emoji (🍔, 🎬, etc.)
+
+  - name: color
+    type: string
+    required: false
+    description: Hex color code for UI display
+
+  - name: description
+    type: string
+    required: false
+    description: Category description
+
+  - name: is_default
+    type: boolean
+    required: true
+    description: Whether this is a default system category
+
+  - name: created_at
+    type: timestamp
+    required: true
+    description: When record was created
